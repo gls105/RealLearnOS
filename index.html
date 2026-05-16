@@ -2162,7 +2162,7 @@ td:first-child, th:first-child {
         <div class="teacher-strip">
           <div class="panel teacher-card"><i class="ph ph-keyboard"></i><div><strong>Fast grade entry</strong><span>Type a grade and press Enter to move straight down to the next student.</span></div></div>
           <div class="panel teacher-card"><i class="ph ph-bell-ringing"></i><div><strong>Yellow ding feedback</strong><span>Saving grades, notes, attendance, and assignments shows a short confirmation.</span></div></div>
-          <div class="panel teacher-card" style="cursor:pointer" onclick="activateView('scorecard')"><i class="ph ph-check-square-offset"></i><div><strong>ScoreCard beta</strong><span>Add an answer key, take careful photos, then review suggested grades before saving.</span></div></div>
+          <div class="panel teacher-card" style="cursor:pointer" onclick="activateView('scorecard')"><i class="ph ph-check-square-offset"></i><div><strong>ScoreCard beta</strong><span>Multiple choice only for now: add a key, take clear photos, then review suggested grades.</span></div></div>
         </div>
         <div class="quick-actions">
           <button class="btn dark" onclick="activateView('attendance')" title="Take attendance"><i class="ph ph-calendar-check"></i> Take Attendance</button>
@@ -2329,10 +2329,10 @@ td:first-child, th:first-child {
         <div class="panel scorecard-hero">
           <span class="beta-pill"><i class="ph ph-sparkle"></i> Teacher-controlled beta</span>
           <h2>Grade paper work from photos.</h2>
-          <p>ScoreCard helps teachers move faster without giving up control: add an answer key, upload or take photos of student work, review every suggested score, then save only what you approve.</p>
+          <p>ScoreCard helps teachers move faster without giving up control. Beta supports multiple choice only for now — no number responses or short answers yet. Add an answer key, upload or take photos of student work, review every suggested score, then save only what you approve.</p>
         </div>
         <div class="scorecard-grid">
-          <div class="panel scorecard-step"><i class="ph ph-list-checks"></i><small>Step 01</small><strong>Add the answer key</strong><span>Enter the assignment name, question count, point values, and correct answers before scanning student work.</span></div>
+          <div class="panel scorecard-step"><i class="ph ph-list-checks"></i><small>Step 01</small><strong>Set up the answer key</strong><span>Choose multiple choice, enter how many questions, pick answer choices, point value, and the correct answers.</span></div>
           <div class="panel scorecard-step"><i class="ph ph-camera"></i><small>Step 02</small><strong>Take clear photos</strong><span>Use bright light, keep the whole page in frame, flatten the paper, and take one photo per side.</span></div>
           <div class="panel scorecard-step"><i class="ph ph-magnifying-glass"></i><small>Step 03</small><strong>Review carefully</strong><span>Check handwriting, skipped questions, low-confidence answers, blurry pages, and anything cropped.</span></div>
           <div class="panel scorecard-step"><i class="ph ph-table"></i><small>Step 04</small><strong>Save as draft grades</strong><span>Export results or add them to Simple Grades only after the teacher approves each score.</span></div>
@@ -2340,13 +2340,18 @@ td:first-child, th:first-child {
         <div class="scorecard-workspace">
           <div class="panel scorecard-form">
             <h3>New ScoreCard run</h3>
-            <p>This is the front-end beta flow. The scanner/grading engine comes next.</p>
+            <p>This is the front-end beta flow. ScoreCard currently grades <strong>multiple choice only</strong> — no number responses or short answers yet.</p>
             <div class="scorecard-form-grid">
               <input class="field" placeholder="Assignment name, e.g. Chapter 4 Quiz">
               <select class="field"><option>Period 1 — 8th Math</option><option>Period 2 — 8th Math</option><option>Period 3 — 8th Science</option><option>Period 5 — 8th English</option></select>
-              <textarea class="field" style="min-height:118px" placeholder="Answer key example: 1) B, 2) 42, 3) photosynthesis..."></textarea>
-              <div class="scorecard-drop"><div><i class="ph ph-upload-simple"></i><strong>Drop student photos here</strong><br><span>JPG/PNG · one page per image · keep names visible</span></div></div>
+              <select class="field" aria-label="Question type"><option>Multiple choice only</option><option disabled>Number response — coming later</option><option disabled>Short answer — coming later</option></select>
+              <input class="field" type="number" min="1" max="100" placeholder="How many questions? e.g. 20">
+              <select class="field" aria-label="Answer choices"><option>A–D answer choices</option><option>A–E answer choices</option><option>True / False</option></select>
+              <input class="field" type="number" min="1" max="10" placeholder="Points per question, e.g. 1">
+              <textarea class="field" style="min-height:118px" placeholder="Multiple-choice answer key example: 1) B, 2) D, 3) A, 4) C..."></textarea>
+              <div class="scorecard-drop"><div><i class="ph ph-upload-simple"></i><strong>Drop student photos here</strong><br><span>JPG/PNG · one page per image · multiple choice sheets only</span></div></div>
             </div>
+            <div class="scorecard-callout" style="margin-top:14px"><strong>Beta limit:</strong> ScoreCard can grade multiple choice only right now. Number answers, free response, essays, and short answers are not supported yet.</div>
             <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px;flex-wrap:wrap">
               <button class="btn" type="button" onclick="showToast('ScoreCard answer key saved as draft')"><i class="ph ph-floppy-disk"></i> Save draft</button>
               <button class="btn dark" type="button" onclick="showToast('ScoreCard beta scan coming soon')"><i class="ph ph-sparkle"></i> Start beta scan</button>
@@ -2358,6 +2363,7 @@ td:first-child, th:first-child {
             <ul>
               <li><i class="ph ph-check-circle"></i><span>Retake blurry, dark, tilted, or cropped photos.</span></li>
               <li><i class="ph ph-check-circle"></i><span>Make sure the whole answer area and student name are visible.</span></li>
+              <li><i class="ph ph-check-circle"></i><span>Use multiple choice sheets only; number and short-answer grading is not ready yet.</span></li>
               <li><i class="ph ph-check-circle"></i><span>Review every low-confidence answer before saving.</span></li>
               <li><i class="ph ph-check-circle"></i><span>Do not upload private student information you do not need.</span></li>
               <li><i class="ph ph-check-circle"></i><span>Final grades should stay teacher-approved, not auto-posted.</span></li>
