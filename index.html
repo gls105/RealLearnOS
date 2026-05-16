@@ -361,6 +361,87 @@ h1 {
 }
 .teacher-card strong { display: block; }
 .teacher-card span { color: var(--muted); font-size: 13px; }
+.scorecard-hero {
+  padding: 24px;
+  color: #fff;
+  background: linear-gradient(135deg, #171b2a 0%, #26304a 58%, #4f6df5 145%);
+  overflow: hidden;
+  position: relative;
+}
+.scorecard-hero::after {
+  content: "";
+  position: absolute;
+  right: -54px;
+  top: -54px;
+  width: 180px;
+  height: 180px;
+  border-radius: 999px;
+  background: rgba(255, 224, 107, .25);
+}
+.scorecard-hero > * { position: relative; z-index: 1; }
+.beta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 5px 10px;
+  background: var(--soft-amber);
+  color: #7a5200;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.scorecard-hero h2 { margin: 14px 0 8px; font-size: 42px; letter-spacing: -0.06em; }
+.scorecard-hero p { max-width: 680px; margin: 0; color: rgba(255,255,255,.82); line-height: 1.55; }
+.scorecard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 16px 0;
+}
+.scorecard-step { padding: 16px; }
+.scorecard-step i {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: #eef3ff;
+  color: var(--brand);
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+.scorecard-step small { color: var(--brand); font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+.scorecard-step strong { display: block; margin: 5px 0; }
+.scorecard-step span { display: block; color: var(--muted); font-size: 13px; line-height: 1.45; }
+.scorecard-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+  gap: 16px;
+  align-items: start;
+}
+.scorecard-form { padding: 20px; }
+.scorecard-form h3, .scorecard-checklist h3 { margin: 0 0 6px; }
+.scorecard-form p, .scorecard-checklist p { color: var(--muted); margin: 0 0 16px; }
+.scorecard-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.scorecard-drop {
+  min-height: 118px;
+  border: 2px dashed #cad2e3;
+  border-radius: 16px;
+  background: #f8faff;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: var(--muted);
+  padding: 14px;
+}
+.scorecard-drop i { display: block; font-size: 30px; color: var(--brand); margin-bottom: 6px; }
+.scorecard-checklist { padding: 20px; }
+.scorecard-checklist ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.scorecard-checklist li { display: flex; gap: 10px; color: #495061; font-size: 14px; line-height: 1.45; }
+.scorecard-checklist li i { color: var(--green); font-size: 18px; flex: 0 0 auto; }
+.scorecard-callout { margin-top: 14px; padding: 14px; border-radius: 16px; background: var(--soft-amber); color: #805600; font-size: 13px; line-height: 1.45; }
 
 .home-workspace {
   display: grid;
@@ -1341,7 +1422,7 @@ td:first-child, th:first-child {
 }
 
 @media (max-width: 920px) {
-  .integrations, .home-grid, .home-workspace, .teacher-strip, .grade-tools, .updates-grid, .roadmap-grid, .printable-grid, .assignment-section, .assignment-section.three, .assignment-checks, .onboarding-preview { grid-template-columns: 1fr; }
+  .integrations, .home-grid, .home-workspace, .teacher-strip, .grade-tools, .updates-grid, .roadmap-grid, .printable-grid, .assignment-section, .assignment-section.three, .assignment-checks, .onboarding-preview, .scorecard-grid, .scorecard-workspace, .scorecard-form-grid { grid-template-columns: 1fr; }
   .ai-search { grid-template-columns: 1fr; }
   .app-layout { grid-template-columns: 1fr; }
   .sidebar { position: static; }
@@ -2062,6 +2143,7 @@ td:first-child, th:first-child {
         <button class="side-link active" data-view="home"><i class="ph ph-house"></i> Home</button>
         <button class="side-link" data-view="grades"><i class="ph ph-table"></i> Simple Grades</button>
         <button class="side-link" data-view="assignments"><i class="ph ph-clipboard-text"></i> Assignments</button>
+        <button class="side-link" data-view="scorecard"><i class="ph ph-check-square-offset"></i> ScoreCard <span class="beta-pill" style="margin-left:auto;padding:2px 7px;font-size:10px">Beta</span></button>
         <button class="side-link" data-view="attendance"><i class="ph ph-calendar-check"></i> Attendance and Absences</button>
         <button class="side-link" data-view="printables"><i class="ph ph-printer"></i> Printables</button>
         <button class="side-link" data-view="roadmap"><i class="ph ph-map-trifold"></i> Roadmap</button>
@@ -2080,12 +2162,13 @@ td:first-child, th:first-child {
         <div class="teacher-strip">
           <div class="panel teacher-card"><i class="ph ph-keyboard"></i><div><strong>Fast grade entry</strong><span>Type a grade and press Enter to move straight down to the next student.</span></div></div>
           <div class="panel teacher-card"><i class="ph ph-bell-ringing"></i><div><strong>Yellow ding feedback</strong><span>Saving grades, notes, attendance, and assignments shows a short confirmation.</span></div></div>
-          <div class="panel teacher-card"><i class="ph ph-printer"></i><div><strong>Ready for paper</strong><span>Print blank grade grids, behavior forms, and parent call logs.</span></div></div>
+          <div class="panel teacher-card" style="cursor:pointer" onclick="activateView('scorecard')"><i class="ph ph-check-square-offset"></i><div><strong>ScoreCard beta</strong><span>Add an answer key, take careful photos, then review suggested grades before saving.</span></div></div>
         </div>
         <div class="quick-actions">
           <button class="btn dark" onclick="activateView('attendance')" title="Take attendance"><i class="ph ph-calendar-check"></i> Take Attendance</button>
           <button class="btn dark" onclick="activateView('grades')" title="Open gradebook"><i class="ph ph-table"></i> Open Gradebook</button>
           <button class="btn" onclick="activateView('assignments')" title="Add an assignment"><i class="ph ph-plus-circle"></i> Add Assignment</button>
+          <button class="btn" onclick="activateView('scorecard')" title="Open ScoreCard beta"><i class="ph ph-check-square-offset"></i> ScoreCard Beta</button>
           <button class="btn" onclick="printTemplate('attendance')" title="Print attendance sheet"><i class="ph ph-printer"></i> Print Attendance</button>
         </div>
         <div class="home-workspace">
@@ -2238,6 +2321,49 @@ td:first-child, th:first-child {
         <div class="panel form-card">
           <h3>Assignment notes</h3>
           <div class="activity" id="assignmentList">New assignments and notes will appear here.</div>
+        </div>
+      </section>
+
+      <section class="view" id="scorecard">
+        <div class="app-top"><div><h2>ScoreCard</h2><p>Beta paper grading assistant for real classroom workflows.</p></div><span class="beta-pill"><i class="ph ph-flask"></i> Beta</span></div>
+        <div class="panel scorecard-hero">
+          <span class="beta-pill"><i class="ph ph-sparkle"></i> Teacher-controlled beta</span>
+          <h2>Grade paper work from photos.</h2>
+          <p>ScoreCard helps teachers move faster without giving up control: add an answer key, upload or take photos of student work, review every suggested score, then save only what you approve.</p>
+        </div>
+        <div class="scorecard-grid">
+          <div class="panel scorecard-step"><i class="ph ph-list-checks"></i><small>Step 01</small><strong>Add the answer key</strong><span>Enter the assignment name, question count, point values, and correct answers before scanning student work.</span></div>
+          <div class="panel scorecard-step"><i class="ph ph-camera"></i><small>Step 02</small><strong>Take clear photos</strong><span>Use bright light, keep the whole page in frame, flatten the paper, and take one photo per side.</span></div>
+          <div class="panel scorecard-step"><i class="ph ph-magnifying-glass"></i><small>Step 03</small><strong>Review carefully</strong><span>Check handwriting, skipped questions, low-confidence answers, blurry pages, and anything cropped.</span></div>
+          <div class="panel scorecard-step"><i class="ph ph-table"></i><small>Step 04</small><strong>Save as draft grades</strong><span>Export results or add them to Simple Grades only after the teacher approves each score.</span></div>
+        </div>
+        <div class="scorecard-workspace">
+          <div class="panel scorecard-form">
+            <h3>New ScoreCard run</h3>
+            <p>This is the front-end beta flow. The scanner/grading engine comes next.</p>
+            <div class="scorecard-form-grid">
+              <input class="field" placeholder="Assignment name, e.g. Chapter 4 Quiz">
+              <select class="field"><option>Period 1 — 8th Math</option><option>Period 2 — 8th Math</option><option>Period 3 — 8th Science</option><option>Period 5 — 8th English</option></select>
+              <textarea class="field" style="min-height:118px" placeholder="Answer key example: 1) B, 2) 42, 3) photosynthesis..."></textarea>
+              <div class="scorecard-drop"><div><i class="ph ph-upload-simple"></i><strong>Drop student photos here</strong><br><span>JPG/PNG · one page per image · keep names visible</span></div></div>
+            </div>
+            <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px;flex-wrap:wrap">
+              <button class="btn" type="button" onclick="showToast('ScoreCard answer key saved as draft')"><i class="ph ph-floppy-disk"></i> Save draft</button>
+              <button class="btn dark" type="button" onclick="showToast('ScoreCard beta scan coming soon')"><i class="ph ph-sparkle"></i> Start beta scan</button>
+            </div>
+          </div>
+          <div class="panel scorecard-checklist">
+            <h3>Be careful before scanning</h3>
+            <p>ScoreCard should help teachers, not replace teacher judgment.</p>
+            <ul>
+              <li><i class="ph ph-check-circle"></i><span>Retake blurry, dark, tilted, or cropped photos.</span></li>
+              <li><i class="ph ph-check-circle"></i><span>Make sure the whole answer area and student name are visible.</span></li>
+              <li><i class="ph ph-check-circle"></i><span>Review every low-confidence answer before saving.</span></li>
+              <li><i class="ph ph-check-circle"></i><span>Do not upload private student information you do not need.</span></li>
+              <li><i class="ph ph-check-circle"></i><span>Final grades should stay teacher-approved, not auto-posted.</span></li>
+            </ul>
+            <div class="scorecard-callout"><strong>Beta promise:</strong> ScoreCard creates draft suggestions only. The teacher reviews, edits, and approves before anything goes into the gradebook.</div>
+          </div>
         </div>
       </section>
 
