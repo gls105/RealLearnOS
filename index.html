@@ -326,6 +326,34 @@ h1 {
   border-radius: 22px;
   box-shadow: 0 16px 45px rgba(38,46,68,.08);
 }
+.panel:not(.scorecard-hero) {
+  color: var(--ink);
+}
+.panel:not(.scorecard-hero) h2,
+.panel:not(.scorecard-hero) h3,
+.panel:not(.scorecard-hero) h4,
+.panel:not(.scorecard-hero) strong,
+.panel:not(.scorecard-hero) label {
+  color: var(--ink);
+}
+.panel:not(.scorecard-hero) p,
+.panel:not(.scorecard-hero) span:not(.beta-pill):not(.avg-pill):not(.feed-tag):not(.ai-chip):not(.health-pill),
+.panel:not(.scorecard-hero) small {
+  color: var(--muted);
+}
+.field,
+input,
+select,
+textarea {
+  color: var(--ink);
+  background: #fff;
+}
+.field::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: #8a909b;
+  opacity: 1;
+}
 
 .home-grid {
   display: grid;
@@ -392,6 +420,7 @@ h1 {
   text-transform: uppercase;
   letter-spacing: .06em;
 }
+.side-link .beta-pill { color: #7a5200; background: var(--soft-amber); }
 .scorecard-hero h2 { margin: 14px 0 8px; font-size: 42px; letter-spacing: -0.06em; }
 .scorecard-hero p { max-width: 680px; margin: 0; color: rgba(255,255,255,.82); line-height: 1.55; }
 .scorecard-grid {
